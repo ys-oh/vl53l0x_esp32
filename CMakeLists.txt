@@ -1,5 +1,5 @@
 
-include(${COMPONENT_DIR}/api_path.cmake)
+include(${COMPONENT_DIR}/cmake/api_path.cmake)
 
 set(sources
     ${VL53L0X_API_SRCS}
