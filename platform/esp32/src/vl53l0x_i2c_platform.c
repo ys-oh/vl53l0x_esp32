@@ -11,12 +11,15 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include <rom/ets_sys.h>
+
 #include "vl53l0x_i2c_platform.h"
 #include "vl53l0x_platform_log.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/i2c.h"
+#include "driver/gpio.h"
 
 #ifdef VL53L0X_LOG_ENABLE
 #define trace_print(level, ...) trace_print_module_function(TRACE_MODULE_PLATFORM, level, TRACE_FUNCTION_NONE, ##__VA_ARGS__)
@@ -242,11 +245,23 @@ int32_t VL53L0X_read_dword(uint8_t address, uint8_t index, uint32_t *pdata)
 
 int32_t VL53L0X_platform_wait_us(int32_t wait_us)
 {
+    ets_delay_us(wait_us);
     return STATUS_OK;
 }
 
 int32_t VL53L0X_wait_ms(int32_t wait_ms)
 {
+    int tick = pdMS_TO_TICKS(wait_ms);
+    if (tick > 0)
+    {
+        vTaskDelay(tick);
+    }
+    else
+    {
+        int us = 1000 * wait_ms;
+        ets_delay_us(us);
+    }
+
     return STATUS_OK;
 }
 
@@ -267,10 +282,12 @@ int32_t VL53L0X_release_gpio(void)
 
 int32_t VL53L0X_get_timer_frequency(int32_t *ptimer_freq_hz)
 {
+    *ptimer_freq_hz = 0;
     return STATUS_OK;
 }
 
 int32_t VL53L0X_get_timer_value(int32_t *ptimer_count)
 {
+    *ptimer_count = 0;
     return STATUS_OK;
 }
