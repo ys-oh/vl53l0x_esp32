@@ -6,6 +6,12 @@ menu "VL53L0X API"
         help
             set i2c peripharal number (0, 1 or 2)
 
+    config VL53L0X_I2C_ADDR
+        hex "i2c address"
+        default 0x29
+        help
+            set i2c address (default : 0x29)
+
     config VL53L0X_SDA_PIN
         int "VL53L0X SDA Pin Number"
         default 16

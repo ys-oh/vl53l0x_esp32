@@ -6,12 +6,13 @@ set(sources
     "platform/esp32/src/vl53l0x_i2c_platform.c"
     "platform/esp32/src/vl53l0x_platform_log.c"
     "platform/esp32/src/vl53l0x_platform.c"
-    "platform/esp32/src/vl53l0x.c"
+    "src/vl53l0x.c"
 )
 
 set(includes
     ${VL53L0X_API_INCLUDES}
     "platform/esp32/inc"
+    "include/"
 )
 
 idf_component_register(SRCS ${sources}
