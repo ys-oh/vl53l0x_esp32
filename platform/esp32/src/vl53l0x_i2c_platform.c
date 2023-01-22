@@ -56,7 +56,7 @@ int32_t VL53L0X_comms_initialise(uint8_t  comms_type,
     #define I2C_MASTER_TX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
     #define I2C_MASTER_RX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
 
-    i2c_config_t conf;
+    i2c_config_t conf = { 0 };
     conf.mode = I2C_MODE_MASTER;
     conf.sda_io_num = s_vl53l0x_sda_pin; 
     conf.sda_pullup_en = GPIO_PULLUP_DISABLE;
