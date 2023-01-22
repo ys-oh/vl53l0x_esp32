@@ -31,7 +31,7 @@ void vl53l0x_task(void* p)
     while (1)
     {
         uint16_t data = 0;
-        if (VL53L0X_Device_getMeasurement(&dev, data) == VL53L0X_ERROR_NONE)
+        if (VL53L0X_Device_getMeasurement(&dev, &data) == VL53L0X_ERROR_NONE)
         {
             ESP_LOGI(TAG, "measured data : %d mm", data);
         }
